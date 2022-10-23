@@ -1,0 +1,30 @@
+{
+  "name": "employee-info-tracker-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mseaman26/Employee-Info-Tracker-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mseaman26/Employee-Info-Tracker-/issues"
+  },
+  "homepage": "https://github.com/mseaman26/Employee-Info-Tracker-#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {
+    "jest": "^29.2.1"
+  }
+}
