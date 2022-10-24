@@ -1,0 +1,67 @@
+#top-banner{
+    display: flex;
+    height: 300px;
+    background-color: red;
+    color: white;
+    font-size: 60px;
+    justify-content: center;
+    align-items: center;
+}
+body{
+    
+}
+main{
+ 
+}
+#card-holder{
+    display: flex;
+    align-items: center;
+   
+
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    max-width: 1500px;
+}
+
+.employee-card{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 500px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.employee-banner{
+    height: fit-content;
+    background-color: blue;
+    color: white;
+    font-size: 40px;
+    padding-left: 15px;
+}
+.employee-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%; justify-content: center;
+    align-items: center;
+    background-color: rgb(238, 238, 237);
+}
+.employee-info-box{
+    display: flex;
+    border-top: 2px solid black;
+    border-left: 4px solid black;
+    border-right: 4px solid black;
+    border-bottom: 2px solid black;
+    padding-left: 10px;
+    width: 90%;
+    height: 60px;
+    align-items: center;
+    background-color: white;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  
+}
