@@ -55,7 +55,16 @@ function addEngineer(){
             {
                 type: "input",
                 name: "engineerId",
-                message: "What is your engineer's ID number?"
+                message: "What is your engineer's ID number?",
+                validate: async (input) => {
+                    if(isNumeric(input)){
+                        return true
+                    }
+                    else{
+                        return "ID must be a number"
+                    }
+                 }
+                
             },
             {
                 type: "input",
@@ -85,7 +94,15 @@ function addIntern(){
             {
                 type: "input",
                 name: "internId",
-                message: "What is your intern's ID number?"
+                message: "What is your intern's ID number?",
+                validate: async (input) => {
+                    if(isNumeric(input)){
+                        return true
+                    }
+                    else{
+                        return "ID must be a number"
+                    }
+                 }
             },
             {
                 type: "input",
@@ -135,7 +152,7 @@ function generateCards(employeeArray){
                     <div class="employee-banner">${employeeArray[i].name}<br>${employeeArray[i].emoji} ${employeeArray[i].getRole()}</div>
                     <div class="employee-info">
                         <div class="employee-info-box">ID: ${employeeArray[i].id}</div>
-                        <div class="employee-info-box"><a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
+                        <div class="employee-info-box">Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
                         <div class="employee-info-box">Office number: ${employeeArray[i].officeNumber}</div>
                     </div>
                 </div>`
@@ -146,7 +163,7 @@ function generateCards(employeeArray){
                         <div class="employee-banner">${employeeArray[i].name}<br>${employeeArray[i].emoji} ${employeeArray[i].getRole()}</div>
                         <div class="employee-info">
                             <div class="employee-info-box">ID: ${employeeArray[i].id}</div>
-                            <div class="employee-info-box"><a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
+                            <div class="employee-info-box">Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
                             <div class="employee-info-box">GitHub: <a href="https://github.com/${employeeArray[i].github}" target="_blank">${employeeArray[i].github}</a></div>
                         </div>
                     </div>`
@@ -157,7 +174,7 @@ function generateCards(employeeArray){
                         <div class="employee-banner">${employeeArray[i].name}<br>${employeeArray[i].emoji} ${employeeArray[i].getRole()}</div>
                         <div class="employee-info">
                             <div class="employee-info-box">ID: ${employeeArray[i].id}</div>
-                            <div class="employee-info-box"><a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
+                            <div class="employee-info-box">Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
                             <div class="employee-info-box">School: ${employeeArray[i].school}</div>
                         </div>
                     </div>`
@@ -167,7 +184,11 @@ function generateCards(employeeArray){
     return cardString
     
 }
-
+function isNumeric(str) {//I googled this function to help validate numerical input from the user.  I couldn't figure it out on my own
+    if (typeof str != "string") return false // we only process strings!  
+    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+           !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+  }
 inquirer
     .prompt([
         {
@@ -178,7 +199,15 @@ inquirer
         {
             type: "input",
             name: "managerId",
-            message: "What is your manager's ID number?"
+            message: "What is your manager's ID number?",
+            validate: async (input) => {
+                if(isNumeric(input)){
+                    return true
+                }
+                else{
+                    return "ID must be a number"
+                }
+             }
         },
         {
             type: "input",
@@ -197,12 +226,5 @@ inquirer
     employees.push(manager)
     console.log(employees)
     console.log(manager.emoji)
-    selectEmployeeType()
+    selectEmployeeType()  //selects team members
 })
-
-// 
-
-
-// fs.writeFile("index.html", "hello world", (err) =>{
-//     err ? console.log(err): console.log("HTML generated")
-// })
