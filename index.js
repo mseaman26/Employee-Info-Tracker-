@@ -4,11 +4,13 @@ const fs = require('fs')
 const Manager = require("./lib/Manager")
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern")
+//I don't know what this variable is or how it got there.  I didn't work with a tutor, so it seems like it was generated somehow(?)
 const { type } = require("os")
-
+//this array is ultimately going to contain all of our employee objects
 const employees = []
+//this variable may not ultimately be necessary, but I left it in because the program is working and I don't want to change that
 let doneAddingEmployees = false
-
+//this function gets called after every employee is added.  It also allows the user to top adding employees and thus call the fs.writeFile function
 function selectEmployeeType(){
     if(doneAddingEmployees == false){
         inquirer
@@ -26,16 +28,17 @@ function selectEmployeeType(){
             switch(data.employeeType){
                 case "I don't want to add any more employees":
                     doneAddingEmployees = true
-                    console.log(employees)
                     // generate html file here
                     fs.writeFile("./dist/index.html", `${generateHTMLPage()}`, (err) =>{
                         err ? console.log(err): console.log("HTML generated")
                     })
                     return
                 case "Engineer":
+                    //function call for adding engineer
                     addEngineer()
                     return
                 case "Intern":
+                    //function call for adding intern
                     addIntern()
                     return
             }
@@ -44,6 +47,7 @@ function selectEmployeeType(){
     
     
 }
+
 function addEngineer(){
     inquirer
         .prompt([
@@ -79,7 +83,9 @@ function addEngineer(){
         ])
     .then((data) =>{
         const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub)
+        //adding the newly created Engineer to the "employees" array
         employees.push(engineer)
+        //on to selecting the next employee
         selectEmployeeType()
     })
 }
@@ -117,11 +123,14 @@ function addIntern(){
         ])
     .then((data) =>{
         const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
+        //adding this intern to the employees array
         employees.push(intern)
+        //on to selecting next employee
         selectEmployeeType()
     })
 }
 function generateHTMLPage(){
+    //I haven't figured out how to add comments into the middle of a string literal, but notice the function call of "generateCards" that is within the HTML
     return`<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -143,6 +152,7 @@ function generateHTMLPage(){
 </html>`
 }
 function generateCards(employeeArray){
+    //this function iterates through the employees array and, with the switch statement below, adds the necessary HTML to display a card with each employees info
     let cardString = ""
     for (let i = 0; i < employeeArray.length; i++){
         switch(employeeArray[i].getRole()){
@@ -189,6 +199,7 @@ function isNumeric(str) {//I googled this function to help validate numerical in
     return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
            !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
   }
+//this is the opening code of the program.  It is where we create the manager (there is always a manager and the manager will always be first).  I could have put this code inside of a function, but didn't
 inquirer
     .prompt([
         {
@@ -223,8 +234,8 @@ inquirer
 ])
 .then((data) => {
     const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.managerOfficeNumber)
+    //manager is added to employees array(and is always at index 0)
     employees.push(manager)
-    console.log(employees)
-    console.log(manager.emoji)
-    selectEmployeeType()  //selects team members
+    //select next employee
+    selectEmployeeType()
 })
