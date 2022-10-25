@@ -1,3 +1,4 @@
+//importing out class modules
 const inquirer = require("inquirer")
 const fs = require('fs')
 
@@ -152,7 +153,7 @@ function generateHTMLPage(){
 </html>`
 }
 function generateCards(employeeArray){
-    //this function iterates through the employees array and, with the switch statement below, adds the necessary HTML to display a card with each employees info
+    //this function iterates through the employees array and, with the switch statement below, adds the necessary HTML to display a card with each employees info.  The "getRole()" method is what we use to assess which type of employee each one is
     let cardString = ""
     for (let i = 0; i < employeeArray.length; i++){
         switch(employeeArray[i].getRole()){

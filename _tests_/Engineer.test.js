@@ -1,5 +1,5 @@
 const Engineer = require("../lib/Engineer")
-
+//the tests for the Engineer class.  Fortunately, the "it" functionality and the syntax of jest make it so I don't really need to add comments
 describe("Engineer", () => {
     it("should be an instance of an object when created", () => {
         const engineer = new Engineer()
