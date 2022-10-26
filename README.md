@@ -5,7 +5,7 @@ Employee Info Tracker
     This program allows the user to easily build an HTML page containing cards that show information about employees at a workplace.  The user is prompted by the command line interface to provide information about each employee and can continue adding employees until they choose to stop.  Once they stop, a file called "index.html" is generated in the "dist" directory, which can then be displayed in a browser.  There are three types of employees that can be added: Manager (only one), Engineer, and Intern.  
 
 ## Video Demo of the Project is at the following link:
-
+https://www.youtube.com/watch?v=wo_29xV_Kl4
 
 ## Technologies used
 - JavaScript
@@ -19,11 +19,11 @@ Employee Info Tracker
 - This program features prompts from the inquirer npm tool. Information from the responses is stored as properties within objects.  The prompts can continue indefinitely until the user no longer wants to add any more.  This is an example of recursion
 - An HTML file that is dynamically generated based off of the information provided by the user
 ## Notable Methods
-- Test Driven Developement. The first code that was written for this project was the tests for our employee class and the subsequent subclasses.  The tests ensure that the creation, properties, and methods of these objects remain functional
+- Test Driven Development. The first code that was written for this project consisted of the tests for our Employee class and the subsequent subclasses.  The tests ensure that the creation, properties, and methods of these objects remain functional
 - The usage of class constructors and subclasses. Usage of these objects is a great way to store data in a logical way that is easy to manipulate and work with
-- Importing and Exporting modules.  This practice of writing modular functions is a great way to maintain "separation of concernes" which means that code is separated into individual files and is thus more organized and more maintainable
-- String literals that eventually render as HTML.  Within these string literals, function calls and object properties are called, allowing the HTML to be dynamic according to user input
-- Recursion. The promps within this program can run indefinitely.  This is because the function to slect the next employee to add can ultimately be called within itself.  Only when the user decides to stop adding eployees is the loop broken.  This was the only way I could figure out how to structure this aspect of the program
+- Importing and Exporting modules.  This practice of writing modular functions is a great way to maintain "separation of concerns" which means that code is separated into individual files and is thus more organized and more maintainable
+- String literals that eventually render as HTML.  Within these string literals, function calls and object properties are called, allowing the HTML to be dynamic in accordance to user input
+- Recursion. The prompts within this program can run indefinitely.  This is because the function to select the next employee to add can ultimately be called within itself.  Only when the user decides to stop adding Employees is the loop broken.  This was the only way I could figure out how to structure this aspect of the program
 ## Code Snippets
 - Here is an example of some tests.  They pertain the the Engineer class, which is a subclass of Employee.  
 ```javascript
@@ -79,7 +79,7 @@ Engineer.prototype.getGithub = function(){
 //exporting
 module.exports = Engineer
 ```
-- Here is an example of some HTML data with dynamic aspects to it. We are iterating through the array of created Employees and, wich a switch statement, creating custom cards for each subclass of Employee
+- Here is an example of some HTML data with dynamic aspects to it. We are iterating through the array of created Employees and, with a switch statement, creating custom cards for each subclass of Employee
 ```javascript
 function generateCards(employeeArray){
     //this function iterates through the employees array and, with the switch statement below, adds the necessary HTML to display a card with each employees info.  The "getRole()" method is what we use to assess which type of employee each one is
@@ -123,9 +123,10 @@ function generateCards(employeeArray){
     }
     return cardString
 ```
-## Learning points from this project
-- This was my first experience with Test Driven Developement.  I learned the value of it and look forward to using it more
+## Key Learning points from this project
+- This was my first experience with Test Driven Development.  I learned the value of it and look forward to using it more
 - This was my first project involving classes and subclasses.  Another very useful tool
-- Modularization and separatio of concerns.  Keeping code organized by having modules in separate files that can be imported
+- Modularization and separation of concerns.  Keeping code organized by having modules in separate files that can be imported
 
 ## -By Michael Seaman
+
