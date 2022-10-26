@@ -2,7 +2,7 @@ Employee Info Tracker
 
 ## Description
 
-    This program allows the user to easily build an HTML page containing cards that show information about employees at a workplace.  The user is prompted by the command line interface to provide information about each employee and can continue adding employees until they choose to stop.  Once they stop, a file called "index.html" is generated in the "dist" directory, which can then be displayed in a browser.  There are three types of employees that can be added: Manager (only one), Engineer, and Intern.  
+This program allows the user to easily build an HTML page containing cards that show information about employees at a workplace.  The user is prompted by the command line interface to provide information about each employee and can continue adding employees until they choose to stop.  Once they stop, a file called "index.html" is generated in the "dist" directory, which can then be displayed in a browser.  There are three types of employees that can be added: Manager (only one), Engineer, and Intern.  
 
 ## Video Demo of the Project is at the following link:
 https://www.youtube.com/watch?v=wo_29xV_Kl4
