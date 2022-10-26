@@ -19,64 +19,113 @@ Employee Info Tracker
 - This program features prompts from the inquirer npm tool. Information from the responses is stored as properties within objects.  The prompts can continue indefinitely until the user no longer wants to add any more.  This is an example of recursion
 - An HTML file that is dynamically generated based off of the information provided by the user
 ## Notable Methods
-- Test Driven Developement. The first code that was written for this project was the tests for our employee class and the subsequent subclasses.  The tests ensure that the creation, properties, and methods of these objects remains functional
-- The usage of class constructors and subclasses. Usage of these methods is a great way to store data in a logical way that is easy to manipulate and work with
-- 
+- Test Driven Developement. The first code that was written for this project was the tests for our employee class and the subsequent subclasses.  The tests ensure that the creation, properties, and methods of these objects remain functional
+- The usage of class constructors and subclasses. Usage of these objects is a great way to store data in a logical way that is easy to manipulate and work with
+- Importing and Exporting modules.  This practice of writing modular functions is a great way to maintain "separation of concernes" which means that code is separated into individual files and is thus more organized and more maintainable
+- String literals that eventually render as HTML.  Within these string literals, function calls and object properties are called, allowing the HTML to be dynamic according to user input
+- Recursion. The promps within this program can run indefinitely.  This is because the function to slect the next employee to add can ultimately be called within itself.  Only when the user decides to stop adding eployees is the loop broken.  This was the only way I could figure out how to structure this aspect of the program
 ## Code Snippets
-
-Here are some of the prompts that get displayed in the command line by inquirer
+- Here is an example of some tests.  They pertain the the Engineer class, which is a subclass of Employee.  
 ```javascript
-inquirer
-  .prompt([
-    {
-      type: 'input',
-      name: 'title',
-      message: 'What is the title of your project?',
-    },
-    {
-      type: "input",
-      name: "description",
-      message: "Provide a description of your project"
-    },
-    {
+const Engineer = require("../lib/Engineer")
 
-      type: "list",
-      name: "license",
-      message: "What license would you like to use for this project?",
-      choices: ["Apache License 2.0", "GNU General Public License v3.0", "MIT License", "BSD 2-Clause \"Simplified\" License", `BSD 3-Clause "New" or "Revised" License`, `Boost Software License 1.0`, `Creative Commons Zero v1.0 Universal`, `Eclipse Public License 1.0`, `GNU Affero General Public License v3.0`, `GNU General Public License v2.0`, `GNU Lesser General Public License v3.0`, `Mozilla Public License 2.0`, `The Unlicense` ]
+describe("Engineer", () => {
+    it("should be an instance of an object when created", () => {
+        const engineer = new Engineer()
 
-    },
+        expect(typeof(engineer)).toEqual("object")
+    })
+    it("should have the following properties: name, id, email, emoji(not an argument), and github", () =>{
+        const engineer = new Engineer("mike",23,"snuggles@soft.com", "snuggles")
+
+        expect(engineer.name).toEqual("mike")
+        expect(engineer.id).toEqual(23)
+        expect(engineer.email).toEqual("snuggles@soft.com")
+        expect(engineer.github).toEqual("snuggles")
+        expect(engineer.emoji).toEqual("👓")
+    })
+    it("should have the following methods: getName(), getId(), getEmail(), getGithub(), and getRole()", () => {
+        const engineer = new Engineer("charles", 66, "charlie@chocolatefactory.com", "gobstopper")
+
+        expect(engineer.getName()).toEqual("charles")
+        expect(engineer.getId()).toEqual(66)
+        expect(engineer.getEmail()).toEqual("charlie@chocolatefactory.com")
+        expect(engineer.getGithub()).toEqual("gobstopper")
+        expect(engineer.getRole()).toEqual("Engineer")
+    })
+})
 ```
-
-Here is a portion of the template literal that equates to the README content:
+- Here we have the construction and exportation of the Engineer class, which is a subclass of Employee
 ```javascript
-  function generateReadme(data){
-
-    return `# ${data.title}
-  ## Description
-
-    ${data.description}\n
-  ${generateLicenseBadge(data)}
-
-  ## Table of Contents
-
-  * [Installation](#installation)<br />
-  * [Usage](#usage)<br />
-  * [Contributing to This Repository](#how-to-contribute-to-this-repository)<br />
-  * [Tests](#to-run-tests-run-the-following-command)<br />
-  * [Questions](#questions)<br />
-
-  ## Installation
-
-    To install the necessary dependancies, run the following command:
-
-      ${data.installation}
+const Employee = require("../lib/Employee")
+//sub class of Employee
+class Engineer extends Employee{
+    constructor(name, id, email, github){
+        super()
+        this.name = name
+        this.id = id
+        this.email = email
+        this.github = github
+        this.emoji = "👓"
+    }
+    
+}
+Engineer.prototype.getRole = function(){
+    return "Engineer"
+}
+Engineer.prototype.getGithub = function(){
+    return this.github
+}
+//exporting
+module.exports = Engineer
 ```
-
+- Here is an example of some HTML data with dynamic aspects to it. We are iterating through the array of created Employees and, wich a switch statement, creating custom cards for each subclass of Employee
+```javascript
+function generateCards(employeeArray){
+    //this function iterates through the employees array and, with the switch statement below, adds the necessary HTML to display a card with each employees info.  The "getRole()" method is what we use to assess which type of employee each one is
+    let cardString = ""
+    for (let i = 0; i < employeeArray.length; i++){
+        switch(employeeArray[i].getRole()){
+            case "Manager":
+                cardString +=
+                    `<div class="employee-card">
+                    <div class="employee-banner">${employeeArray[i].name}<br>${employeeArray[i].emoji} ${employeeArray[i].getRole()}</div>
+                    <div class="employee-info">
+                        <div class="employee-info-box">ID: ${employeeArray[i].id}</div>
+                        <div class="employee-info-box">Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
+                        <div class="employee-info-box">Office number: ${employeeArray[i].officeNumber}</div>
+                    </div>
+                </div>`
+                break
+            case "Engineer":
+                cardString +=
+                    `<div class="employee-card">
+                        <div class="employee-banner">${employeeArray[i].name}<br>${employeeArray[i].emoji} ${employeeArray[i].getRole()}</div>
+                        <div class="employee-info">
+                            <div class="employee-info-box">ID: ${employeeArray[i].id}</div>
+                            <div class="employee-info-box">Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
+                            <div class="employee-info-box">GitHub: <a href="https://github.com/${employeeArray[i].github}" target="_blank">${employeeArray[i].github}</a></div>
+                        </div>
+                    </div>`
+                break
+            case "Intern":
+                cardString +=
+                `<div class="employee-card">
+                        <div class="employee-banner">${employeeArray[i].name}<br>${employeeArray[i].emoji} ${employeeArray[i].getRole()}</div>
+                        <div class="employee-info">
+                            <div class="employee-info-box">ID: ${employeeArray[i].id}</div>
+                            <div class="employee-info-box">Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></div>
+                            <div class="employee-info-box">School: ${employeeArray[i].school}</div>
+                        </div>
+                    </div>`
+                break
+        }
+    }
+    return cardString
+```
 ## Learning points from this project
-- An understanding of Node.JS and writing a program for the command line interface
-- How to use template literals to conveniently concatenate data into a string
-- Usage of npm commands and creating package.jason files
-- An understanding of modularization of code
+- This was my first experience with Test Driven Developement.  I learned the value of it and look forward to using it more
+- This was my first project involving classes and subclasses.  Another very useful tool
+- Modularization and separatio of concerns.  Keeping code organized by having modules in separate files that can be imported
 
 ## -By Michael Seaman

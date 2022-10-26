@@ -24,8 +24,4 @@ describe("Engineer", () => {
         expect(engineer.getGithub()).toEqual("gobstopper")
         expect(engineer.getRole()).toEqual("Engineer")
     })
-
-  
-
-   
 })
